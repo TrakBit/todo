@@ -1,4 +1,4 @@
-type name = {name: string};
+type name = string;
 
 type state = {names: list(name)};
 
@@ -7,7 +7,7 @@ type action =
 
 let component = ReasonReact.reducerComponent("Example");
 
-let make = _ => {
+let make = _children => {
   ...component,
   initialState: () => {names: []},
   reducer: (action, state) =>
@@ -16,14 +16,14 @@ let make = _ => {
     },
   render: self =>
     <div>
-      <button onClick=(_event => self.send(Add({name: "harsh"})))>
+      <button onClick=(_event => self.send(Add("harsh")))>
         (ReasonReact.string("button"))
       </button>
       (
         ReasonReact.array(
           Array.of_list(
             self.state.names
-            |> List.map(item => <div> (ReasonReact.string(item.name)) </div>),
+            |> List.map(name => <div> (ReasonReact.string(name)) </div>),
           ),
         )
       )
