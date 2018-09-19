@@ -1,9 +1,11 @@
 type name = {name: string};
 
-type state = {names: list(string)};
+type state = {
+  names: list(name),
+};
 
 type action =
-  | Add(string);
+  | Add(name);
 
 let component = ReasonReact.reducerComponent("Example");
 
@@ -12,14 +14,14 @@ let make = (_) => {
   initialState: () => {names: []},
   reducer: (action, state) =>
     switch (action) {
-    | Add(string) => ReasonReact.Update({names: [ string, ...state.names,]})
+    | Add(name) => ReasonReact.Update({names: [ name, ...state.names,]})
     },
   render: self => {
     <div>
-      <button onClick=(_event => self.send(Add("harsh")))>
+      <button onClick=(_event => self.send(Add({name: "harsh"})))>
         (ReasonReact.string("button"))
       </button>
-      (ReasonReact.array(Array.of_list(self.state.names |>  List.map((_)=> <div>(ReasonReact.string("hey"))</div>))))
+      (ReasonReact.array(Array.of_list(self.state.names |>  List.map((item)=> <div>(ReasonReact.string(item.name))</div>))))
     </div>
   },
 };

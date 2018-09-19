@@ -24,10 +24,10 @@ function make() {
           /* render */(function (self) {
               return React.createElement("div", undefined, React.createElement("button", {
                               onClick: (function () {
-                                  return Curry._1(self[/* send */3], /* Add */["harsh"]);
+                                  return Curry._1(self[/* send */3], /* Add */[/* record */[/* name */"harsh"]]);
                                 })
-                            }, "button"), $$Array.of_list(List.map((function () {
-                                    return React.createElement("div", undefined, "hey");
+                            }, "button"), $$Array.of_list(List.map((function (item) {
+                                    return React.createElement("div", undefined, item[/* name */0]);
                                   }), self[/* state */1][/* names */0])));
             }),
           /* initialState */(function () {
