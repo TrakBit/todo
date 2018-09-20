@@ -7,6 +7,7 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
+var Component1$ReactTemplate = require("./Component1.bs.js");
 
 var component = ReasonReact.reducerComponent("Example");
 
@@ -28,7 +29,7 @@ function make() {
                                 })
                             }, "button"), $$Array.of_list(List.map((function (name) {
                                     return React.createElement("div", undefined, name);
-                                  }), self[/* state */1][/* names */0])));
+                                  }), self[/* state */1][/* names */0])), ReasonReact.element(undefined, undefined, Component1$ReactTemplate.make("hey all", /* array */[])));
             }),
           /* initialState */(function () {
               return /* record */[/* names : [] */0];
