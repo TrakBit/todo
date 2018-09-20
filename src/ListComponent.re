@@ -1,31 +1,30 @@
 open ReasonReact;
 
-type name = string;
-type state = {names: list(name)};
+type message = string;
+type state = {messages: list(message)};
 type action =
-  | Add(name);
+  | Add(message);
 
 let component = reducerComponent("Example");
 
 let make = _children => {
   ...component,
-  initialState: () => {names: []},
+  initialState: () => {messages: []},
   reducer: (action, state) =>
     switch (action) {
-    | Add(name) => Update({names: [name, ...state.names]})
+    | Add(message) => Update({messages: [message, ...state.messages]})
     },
   render: self =>
     <div>
-      <button onClick=(_event => self.send(Add("harsh")))>
+      <button onClick=(_event => self.send(Add("Hello")))>
         (string("button"))
       </button>
       (
         array(
           Array.of_list(
-            self.state.names |> List.map(name => <div> (string(name)) </div>),
+            self.state.messages |> List.map(message => <div> (string(message)) </div>),
           ),
         )
       )
-      <Component1 message="hey all" />
     </div>,
 };

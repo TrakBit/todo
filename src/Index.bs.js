@@ -3,14 +3,8 @@
 
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Component1$ReactTemplate = require("./Component1.bs.js");
-var Component2$ReactTemplate = require("./Component2.bs.js");
-var Component3$ReactTemplate = require("./Component3.bs.js");
+var ListComponent$ReactTemplate = require("./ListComponent.bs.js");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, Component1$ReactTemplate.make("Hello!", /* array */[])), "index1");
-
-ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, Component2$ReactTemplate.make("Hello!", /* array */[])), "index2");
-
-ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, Component3$ReactTemplate.make(/* array */[])), "index3");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, ListComponent$ReactTemplate.make(/* array */[])), "index");
 
 /*  Not a pure module */

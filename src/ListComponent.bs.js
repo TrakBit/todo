@@ -7,7 +7,6 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Component1$ReactTemplate = require("./Component1.bs.js");
 
 var component = ReasonReact.reducerComponent("Example");
 
@@ -25,20 +24,20 @@ function make() {
           /* render */(function (self) {
               return React.createElement("div", undefined, React.createElement("button", {
                               onClick: (function () {
-                                  return Curry._1(self[/* send */3], /* Add */["harsh"]);
+                                  return Curry._1(self[/* send */3], /* Add */["Hello"]);
                                 })
-                            }, "button"), $$Array.of_list(List.map((function (name) {
-                                    return React.createElement("div", undefined, name);
-                                  }), self[/* state */1][/* names */0])), ReasonReact.element(undefined, undefined, Component1$ReactTemplate.make("hey all", /* array */[])));
+                            }, "button"), $$Array.of_list(List.map((function (message) {
+                                    return React.createElement("div", undefined, message);
+                                  }), self[/* state */1][/* messages */0])));
             }),
           /* initialState */(function () {
-              return /* record */[/* names : [] */0];
+              return /* record */[/* messages : [] */0];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
-              return /* Update */Block.__(0, [/* record */[/* names : :: */[
+              return /* Update */Block.__(0, [/* record */[/* messages : :: */[
                             action[0],
-                            state[/* names */0]
+                            state[/* messages */0]
                           ]]]);
             }),
           /* subscriptions */component[/* subscriptions */13],
