@@ -10,21 +10,18 @@ let url = "http://www.mocky.io/v2/5bb2211b330000650011c7d6";
 
 type messages = list(message);
 
-type state =
-  | Loading
-  | Loaded(messages)
-  | Error;
+type state = messages;
 
 type action =
-  | MsgFetch
+  | MsgFetching
   | MsgFetched(messages)
   | MsgFailed;
 
 module DecodeData = {
-  let message = message : message =>
+  let message = json : message =>
     Decode.{
-      id: field("id", int, message),
-      msgbody: field("msgbody", string, message),
+      id: field("id", int, json),
+      msgbody: field("msgbody", string, json),
     };
   let messages = json : messages =>
     Decode.(list(message, json) |> List.map(message => message));
@@ -34,12 +31,12 @@ let component = ReasonReact.reducerComponent("Example");
 
 let make = _children => {
   ...component,
-  initialState: () => Loading,
+  initialState: () => [],
   reducer: (action, _state) =>
     switch (action) {
-    | MsgFetch =>
+    | MsgFetching =>
       ReasonReact.UpdateWithSideEffects(
-        Loading,
+        [],
         (
           self =>
             Js.Promise.(
@@ -56,34 +53,27 @@ let make = _children => {
             )
         ),
       )
-    | MsgFetched(messages) => ReasonReact.Update(Loaded(messages))
-    | MsgFailed => ReasonReact.Update(Error)
+    | MsgFetched(messages) => ReasonReact.Update(messages)
+    | MsgFailed => ReasonReact.Update([])
     },
   render: self =>
     <div>
-      <button onClick=(_event => self.send(MsgFetch))>
+      <button onClick=(_event => self.send(MsgFetching))>
         (ReasonReact.string("Fetch Messages"))
       </button>
-      (
-        switch (self.state) {
-        | Loading => <div> (ReasonReact.string("Loading...")) </div>
-        | Loaded(messages) =>
-          <div>
-            (
-              ReasonReact.array(
-                Array.of_list(
-                  messages
-                  |> List.map(message =>
-                       <li key=(string_of_int(message.id))>
-                         (ReasonReact.string(message.msgbody))
-                       </li>
-                     ),
-                ),
-              )
-            )
-          </div>
-        | Error => <div> (ReasonReact.string("Error")) </div>
-        }
-      )
+      <div>
+        (
+          ReasonReact.array(
+            Array.of_list(
+              self.state
+              |> List.map(message =>
+                   <li key=(string_of_int(message.id))>
+                     (ReasonReact.string(message.msgbody))
+                   </li>
+                 ),
+            ),
+          )
+        )
+      </div>
     </div>,
 };
