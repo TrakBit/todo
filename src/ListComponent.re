@@ -20,11 +20,10 @@ type action =
 module DecodeData = {
   let message = json : message =>
     Decode.{
-      id: field("id", int, json),
-      msgbody: field("msgbody", string, json),
+      id: json |> field("id", int),
+      msgbody: json |> field("msgbody", string),
     };
-  let messages = json : messages =>
-    Decode.(list(message, json) |> List.map(message => message));
+  let messages = Decode.list(message);
 };
 
 let component = ReasonReact.reducerComponent("Example");

@@ -18,10 +18,8 @@ function message(json) {
         ];
 }
 
-function messages(json) {
-  return List.map((function (message) {
-                return message;
-              }), Json_decode.list(message, json));
+function messages(param) {
+  return Json_decode.list(message, param);
 }
 
 var DecodeData = /* module */[
@@ -68,8 +66,8 @@ function make() {
                                 fetch(url).then((function (prim) {
                                             return prim.json();
                                           })).then((function (json) {
-                                          var messages$1 = messages(json);
-                                          return Promise.resolve(Curry._1(self[/* send */3], /* MsgFetched */[messages$1]));
+                                          var messages = Json_decode.list(message, json);
+                                          return Promise.resolve(Curry._1(self[/* send */3], /* MsgFetched */[messages]));
                                         })).catch((function () {
                                         return Promise.resolve(Curry._1(self[/* send */3], /* MsgFailed */1));
                                       }));
